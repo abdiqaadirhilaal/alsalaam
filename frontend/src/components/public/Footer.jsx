@@ -79,9 +79,14 @@ export default function Footer({ settings }) {
       </div>
 
       <div className="border-t border-white/10 py-5">
-        <p className="text-center text-xs text-white/50">
-          {settings?.footerContent || `© ${year} Alsalaam Primary & Secondary School. All rights reserved.`}
-        </p>
+        <div className="container-page flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-center text-xs text-white/50">
+            {settings?.footerContent || `© ${year} Alsalaam Primary & Secondary School. All rights reserved.`}
+          </p>
+          <Link to="/admin/login" className="text-xs text-white/50 hover:text-gold-400 transition-colors">
+            Admin Login
+          </Link>
+        </div>
       </div>
     </footer>
   );
