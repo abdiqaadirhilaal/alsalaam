@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: alsalaam-school
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix backend --legacy-peer-deps && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: node backend/src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+        comment: MongoDB Atlas connection string - set it in the Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: SEED_ADMIN_EMAIL
+        value: admin@alsalaamschool.edu
+      - key: SEED_ADMIN_PASSWORD
+        sync: false
+        comment: Default admin password is ChangeMe123! - set your own in the Render dashboard
+      - key: CLIENT_URL
+        sync: false
+        comment: Optional - comma separated list of allowed CORS origins
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false

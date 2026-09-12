@@ -4,9 +4,12 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import { connectDB } from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
+import { ensureAdmin } from "./utils/seedAdmin.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
@@ -23,11 +26,16 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 dotenv.config();
 connectDB();
+ensureAdmin();
 
 const app = express();
 
+const allowedOrigins = (process.env.CLIENT_URL || "*")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL || "*", credentials: true }));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
@@ -49,6 +57,13 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/admissions", admissionRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const distPath = path.resolve(__dirname, "../../frontend/dist");
+  app.use(express.static(distPath));
+  app.get(/^(?!\/api).*/, (req, res) => res.sendFile(path.join(distPath, "index.html")));
+}
 
 app.use(notFound);
 app.use(errorHandler);
