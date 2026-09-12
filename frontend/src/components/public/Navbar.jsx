@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import schoolLogo from "../../assets/school-logo.png";
 
 const links = [
   { to: "/", label: "Home" },
@@ -36,9 +37,7 @@ export default function Navbar({ settings }) {
           {settings?.logo ? (
             <img src={settings.logo} alt="School logo" className="h-11 w-11 rounded-full object-cover ring-2 ring-gold-400" />
           ) : (
-            <div className={`h-11 w-11 rounded-full flex items-center justify-center ${scrolled ? "bg-navy-800" : "bg-white/20 backdrop-blur"}`}>
-              <GraduationCap className={scrolled ? "text-gold-400" : "text-white"} size={24} />
-            </div>
+            <img src={schoolLogo} alt="Alsalaam School logo" className="h-11 w-11 rounded-full object-cover ring-2 ring-gold-400" />
           )}
           <div className="leading-tight">
             <p className={`font-display font-bold text-sm md:text-base ${scrolled ? "text-navy-900" : "text-white"}`}>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Youtube, Phone, Mail, MapPin, GraduationCap } from "lucide-react";
+import { Facebook, Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
+import schoolLogo from "../../assets/school-logo.png";
 
 const quickLinks = [
   { to: "/", label: "Home" },
@@ -18,9 +19,7 @@ export default function Footer({ settings }) {
       <div className="container-page section-padding !py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <div className="h-11 w-11 rounded-full bg-navy-800 flex items-center justify-center">
-              <GraduationCap className="text-gold-400" size={22} />
-            </div>
+            <img src={schoolLogo} alt="Alsalaam School logo" className="h-11 w-11 rounded-full object-cover ring-2 ring-gold-400" />
             <p className="font-display font-bold text-white">Alsalaam School</p>
           </div>
           <p className="text-sm leading-relaxed">

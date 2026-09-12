@@ -2,9 +2,10 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   LayoutDashboard, Mail, Image, Video, Users, Newspaper, CalendarDays,
-  Megaphone, Trophy, FileText, Settings, UserCog, LogOut, Menu, X, GraduationCap,
+  Megaphone, Trophy, FileText, Settings, UserCog, LogOut, Menu, X,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import schoolLogo from "../assets/school-logo.png";
 
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -41,9 +42,7 @@ export default function AdminLayout() {
         ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         <div className="p-6 flex items-center gap-3 border-b border-white/10">
-          <div className="h-10 w-10 rounded-full bg-navy-800 flex items-center justify-center">
-            <GraduationCap className="text-gold-400" size={20} />
-          </div>
+          <img src={schoolLogo} alt="Alsalaam School logo" className="h-10 w-10 rounded-full object-cover ring-2 ring-gold-400" />
           <div>
             <p className="font-display font-bold text-sm text-white">Alsalaam Admin</p>
             <p className="text-xs text-white/50">Content Management</p>
