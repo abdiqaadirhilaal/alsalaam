@@ -25,6 +25,7 @@ import settingsRoutes from "./routes/settingsRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 dotenv.config();
+process.on("unhandledRejection", (reason) => console.error("Unhandled rejection:", reason));
 connectDB();
 ensureAdmin();
 
